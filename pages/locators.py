@@ -1,8 +1,9 @@
 from selenium.webdriver.common.by import By # импортируем, чтобы писать селекторы
 
 
-class MainPageLocators():   # объявляем класс селекторов для элементов главной страницы
+class BasePageLocators():   # объявляем класс селекторов, одинаковых для всех страниц
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
 
 class LoginPageLocators():  # объявляем класс селекторов для элементов страницы логина
