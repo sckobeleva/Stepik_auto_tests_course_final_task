@@ -13,7 +13,7 @@ class ProductPage(BasePage):
     def should_be_success_message(self): # проверяем, что есть хинт о добавлении товара в корзину
         message_element = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE) # находим элемент
         message = message_element.text  # извлекаем текст
-        assert 'был добавлен в вашу корзину' or 'has been added to your basket' in message, "Message is not presented"  # сравниваем с нужным текстом
+        assert 'был добавлен в вашу корзину' or 'has been added to your basket' in message, "Success message is not presented"  # сравниваем с нужным текстом
 
     def should_be_correct_name_in_message(self):    # проверяем, что название на странице товара и в хинте совпадает
         name1_element = self.browser.find_element(*ProductPageLocators.NAME_ON_PAGE)    # находим элемент на странице
@@ -28,6 +28,13 @@ class ProductPage(BasePage):
         price2_element = self.browser.find_element(*ProductPageLocators.PRICE_IN_BASKET)    # находим элемент в хинте
         price2 = price2_element.text    # извлекаем текст
         assert price1 == price2, "Incorrect book's price"   # сравниваем два найденных значения
+
+    def should_not_be_success_message(self):    # проверяем, что пока нет хинта и добавлении товара в корзину
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+
+    def success_message_should_be_disappeared(self):    # проверяем, что хинт о добавлении в корзину исчез
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Success message isn't disappeared"
+
 
 
 
