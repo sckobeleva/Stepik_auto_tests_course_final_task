@@ -13,7 +13,7 @@ class ProductPage(BasePage):
     def should_be_success_message(self): # проверяем, что есть хинт о добавлении товара в корзину
         message_element = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE) # находим элемент
         message = message_element.text  # извлекаем текст
-        assert 'был добавлен в вашу корзину' or 'has been added to your basket' in message, "Success message is not presented"  # сравниваем с нужным текстом
+        assert 'has been added to your basket' in message, "Success message is not presented"  # сравниваем с нужным текстом
 
     def should_be_correct_name_in_message(self):    # проверяем, что название на странице товара и в хинте совпадает
         name1_element = self.browser.find_element(*ProductPageLocators.NAME_ON_PAGE)    # находим элемент на странице

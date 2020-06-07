@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait # импортируем
 from selenium.webdriver.support import expected_conditions as EC    # импортируем для метода is_disappeared
 from .locators import BasePageLocators
 
+
 class BasePage():   # методы в алфавитном порядке
 
     def __init__(self, browser, url, timeout=10):   # конструктор с атрибутами класса
@@ -14,8 +15,12 @@ class BasePage():   # методы в алфавитном порядке
         self.browser.implicitly_wait(timeout) # команда для неявного ожидания со значением по умолчанию 10
 
     def go_to_login_page(self): # переходим на страницу логина
-        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)    # находим элемент
-        login_link.click()  # кликаем по нему
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)    # находим кнопку регистраии/логина
+        login_link.click()  # кликаем по ней
+
+    def go_to_basket(self):  # переходим в корзину
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)  # находим кнопку перехода в корзину
+        basket_link.click()  # кликаем по кнопке
 
     def is_element_present(self, how, what): # проверяем, есть ли элемент, с помощью 2х аргументов: КАК искать (css) и ЧТО (строка-селектор)
         try:    # используем конструкцию try/except, чтобы перехватывать исключение NoSuchElementException
@@ -57,3 +62,4 @@ class BasePage():   # методы в алфавитном порядке
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
