@@ -1,13 +1,13 @@
-import math
+import math # импортируем для def should_be_authorized_user
 from selenium.common.exceptions import NoSuchElementException   # импортируем для методов def is_element_present и is_not_element_present
 from selenium.common.exceptions import NoAlertPresentException  # импортируем для метода def solve_quiz_and_get_code
 from selenium.common.exceptions import TimeoutException # импортируем для метода is_disappeared
 from selenium.webdriver.support.ui import WebDriverWait # импортируем для метода is_disappeared
 from selenium.webdriver.support import expected_conditions as EC    # импортируем для метода is_disappeared
-from .locators import BasePageLocators
+from .locators import BasePageLocators  # импортируем класс локаторов, чтоб применить их в проверках
 
 
-class BasePage():   # методы в алфавитном порядке
+class BasePage:   # методы в алфавитном порядке
 
     def __init__(self, browser, url, timeout=10):   # конструктор с атрибутами класса
         self.browser = browser  # browser это функция, которая передается как параметр (см.confest.py), она запускает браузер и закрывает после всех тестов
@@ -20,7 +20,7 @@ class BasePage():   # методы в алфавитном порядке
 
     def go_to_basket(self):  # переходим в корзину
         basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)  # находим кнопку перехода в корзину
-        basket_link.click()  # кликаем по кнопке
+        basket_link.click()  # кликаем по ней
 
     def is_element_present(self, how, what): # проверяем, есть ли элемент, с помощью 2х аргументов: КАК искать (css) и ЧТО (строка-селектор)
         try:    # используем конструкцию try/except, чтобы перехватывать исключение NoSuchElementException
@@ -29,7 +29,7 @@ class BasePage():   # методы в алфавитном порядке
             return False
         return True
 
-    def is_not_element_present(self, how, what): # проверяем, есть ли элемент, с помощью 2х аргументов: КАК искать (css) и ЧТО (строка-селектор)
+    def is_not_element_present(self, how, what): # проверяем, нет ли элемента, с помощью 2х аргументов: КАК искать (css) и ЧТО (строка-селектор)
         try:    # используем конструкцию try/except, чтобы перехватывать исключение NoSuchElementException
             self.browser.find_element(how, what)
         except NoSuchElementException:

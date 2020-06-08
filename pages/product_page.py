@@ -1,4 +1,4 @@
-from .base_page import BasePage # импортируем BasePage, чтобы создать свой наследуемый от него класс
+from .base_page import BasePage     # импортируем BasePage, чтобы создать свой наследуемый от него класс
 from .locators import ProductPageLocators   # импортируем класс локаторов, чтоб применить их в проверках
 
 
@@ -10,8 +10,8 @@ class ProductPage(BasePage):
         click_btn = self.browser.find_element(*ProductPageLocators.BTN_ADD_TO_BASKET)
         click_btn.click()
 
-    def should_be_success_message(self): # проверяем, что есть хинт о добавлении товара в корзину
-        message_element = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE) # находим элемент
+    def should_be_success_message(self):    # проверяем, что есть хинт о добавлении товара в корзину
+        message_element = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE)   # находим элемент
         message = message_element.text  # извлекаем текст
         assert 'has been added to your basket' in message, "Success message is not presented"  # сравниваем с нужным текстом
 
