@@ -16,13 +16,13 @@ def browser(request):
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome(options=options)
-        browser.implicitly_wait(5)  # неявное ожидание, говорим WebDriver искать каждый элемент в течение 5 секунд
+        # browser.implicitly_wait(5)  # неявное ожидание, говорим WebDriver искать каждый элемент в течение 5 секунд
     elif browser_name == "firefox":
         fp = webdriver.FirefoxProfile()
         fp.set_preference("intl.accept_languages", user_language)
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox(firefox_profile=fp)
-        browser.implicitly_wait(5)  # неявное ожидание, говорим WebDriver искать каждый элемент в течение 5 секунд
+        # browser.implicitly_wait(5)  # неявное ожидание, говорим WebDriver искать каждый элемент в течение 5 секунд
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser   # финализатором закрываем браузер (после завершения теста, который вызывал фикстуру, выполнение продолжится со строки, следующей за строкой yield)
