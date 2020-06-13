@@ -5,8 +5,8 @@ from .pages.basket_page import BasketPage   # импортируем класс,
 from .pages.login_page import LoginPage  # импортируем класс, элементы которого будем использовать в проверках
 
 
-@pytest.mark.registration
-class TestUserAddToBasketFromProductPage:
+@pytest.mark.registration   # помечаем маркировкой (тесты группы регистрация)
+class TestUserAddToBasketFromProductPage:   # для удобства объединяем тесты в класс
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
         link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
@@ -24,7 +24,7 @@ class TestUserAddToBasketFromProductPage:
         page.open()  # открываем страницу товара
         page.should_not_be_success_message()  # проверяем, что нет сообщения об успехе с помощью is_not_element_present
 
-    @pytest.mark.need_review
+    @pytest.mark.need_review    # здесь и далее помечаем маркировкой (тесты для рецензирования)
     def test_user_can_add_product_to_basket(self, browser): # не забываем передать первым аргументом self
         link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/?promo=offer0"
         page = ProductPage(browser, link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
@@ -51,7 +51,7 @@ def test_guest_can_add_product_to_basket(browser, promo_offer):
     page.should_be_correct_price_in_message()   # проверяем, что в хинте правильная цена
 
 
-@pytest.mark.xfail  # тест упадет, помечаем как ожидаемо падающий
+@pytest.mark.xfail  # тест упадет, помечаем маркировкой как ожидаемо падающий
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
     page = ProductPage(browser, link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
